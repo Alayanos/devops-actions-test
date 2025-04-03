@@ -1,4 +1,4 @@
-name: Use Central Go Test
+name: Use Central Test + Validate
 
 on:
   push:
@@ -8,5 +8,3 @@ on:
 jobs:
   test:
     uses: Alayanos/devops-actions-poc/.github/workflows/go-test.yml@main
-    with:
-      go-version: '1.21'

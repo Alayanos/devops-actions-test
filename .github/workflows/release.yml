@@ -1,0 +1,19 @@
+# .github/workflows/release.yml in devops-actions-test
+
+name: Use Central Release
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  release:
+    uses: Alayanos/devops-actions-poc/.github/workflows/release.yml@main
+    with:
+      service_name: devops-actions-test
+      service_title: DevOps Actions Test
+    secrets:
+      GOOGLE_CREDENTIALS_AUTH: ${{ secrets.GOOGLE_CREDENTIALS_AUTH }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

@@ -1,0 +1,10 @@
+name: Use Central Trivy Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  
+jobs:
+  trivy-scan:
+    uses: Alayanos/devops-actions-poc/.github/workflows/trivy.yml@main

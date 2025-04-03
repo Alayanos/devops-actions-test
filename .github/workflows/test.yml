@@ -2,7 +2,7 @@ name: Use Central Test + Validate
 
 on:
   push:
-    branches: [main]
+    branches: [main] # test the workflow
   pull_request:
   
 jobs:

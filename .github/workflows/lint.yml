@@ -10,4 +10,3 @@ jobs:
     uses: alayanos/devops-actions-poc/.github/workflows/lint-golangci.yml@main
     with:
       go-version: '1.21'
-      lint-version: 'v2.0.2'

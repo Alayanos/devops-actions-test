@@ -1,6 +1,6 @@
 FROM golang:latest as builder
 RUN mkdir -p /build/atv
-ADD . /build/atv
+ADD . /build /build
 WORKDIR /build/atv
 ENV GOPATH=/build
 ARG ARG_BUILD=release-scratch

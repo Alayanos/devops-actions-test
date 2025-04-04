@@ -29,7 +29,7 @@ USER appuser
 # COPY --from=builder /build/atv/_dist/atv-example-service/atv-example-service /app/
 
 # Test-only: create dummy executable
-RUN echo -e '#!/bin/sh\n\necho "Hello from dummy binary"' > /app/atv-example-service && chmod +x /app/atv-example-service
+RUN mkdir -p /app && echo -e '#!/bin/sh\n\necho "Hello from dummy binary"' > /app/atv-example-service && chmod +x /app/atv-example-service
 
 COPY --from=builder /build/atv/config /app/config
 

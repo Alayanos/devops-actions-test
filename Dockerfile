@@ -22,14 +22,16 @@ RUN apk update
 RUN apk upgrade
 RUN apk add ca-certificates && update-ca-certificates
 RUN apk add --update tzdata
+
+# --- Test-only: create dummy executable before switching user ---
+RUN mkdir -p /app && echo -e '#!/bin/sh\n\necho "Hello from dummy binary"' > /app/atv-example-service && chmod +x /app/atv-example-service
+# ----------------------------------------------------------------
+
 RUN adduser -S -D -H -h /app appuser
 USER appuser
 
-# Real copy from builder (commented out — won't exist during testing)
+# Real copy from builder (commented out — won’t exist during testing)
 # COPY --from=builder /build/atv/_dist/atv-example-service/atv-example-service /app/
-
-# Test-only: create dummy executable
-RUN mkdir -p /app && echo -e '#!/bin/sh\n\necho "Hello from dummy binary"' > /app/atv-example-service && chmod +x /app/atv-example-service
 
 COPY --from=builder /build/atv/config /app/config
 

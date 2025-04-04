@@ -1,7 +1,7 @@
-v1.1.8
-
-release-scratch:
-	echo "Building app version $(VERSION) with release-scratch target"
+v1.1.4
 
 build:
 	echo "Building app version $(VERSION)"
+
+release-scratch:
+	echo "Running release-scratch target"

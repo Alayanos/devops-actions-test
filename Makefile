@@ -1,4 +1,4 @@
-VERSION := v1.1.4
+v1.1.8
 
 release-scratch:
 	echo "Building app version $(VERSION) with release-scratch target"

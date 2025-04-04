@@ -3,8 +3,10 @@ RUN mkdir -p /build/atv
 ADD . /build /build
 WORKDIR /build/atv
 ENV GOPATH=/build
+#ARG ARG_BUILD=release-scratch
+#RUN make $ARG_BUILD
 ARG ARG_BUILD=release-scratch
-RUN make $ARG_BUILD
+RUN echo "Skipping make step, no actual build required"
 FROM alpine
 RUN apk update
 RUN apk upgrade

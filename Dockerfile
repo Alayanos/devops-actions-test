@@ -1,22 +1,33 @@
-# --- Original Dockerfile commented out ---
-# FROM golang:latest as builder
-# RUN mkdir -p /build/atv
-# ADD . /build /build
-# WORKDIR /build/atv
-# ENV GOPATH=/build
-# ARG ARG_BUILD=release-scratch
-# RUN echo "Skipping make step, no actual build required"
-# FROM alpine
-# RUN apk update
-# RUN apk upgrade
-# RUN apk add ca-certificates && update-ca-certificates
-# RUN apk add --update tzdata
-# RUN adduser -S -D -H -h /app appuser
-# USER appuser
-# COPY --from=builder /build/atv/config /app/config
-# WORKDIR /app
-# CMD ["./atv-example-service"]
+# Stage 1: Builder
+FROM golang:latest as builder
 
-# --- ✅ Minimal Testing Dockerfile ---
-FROM busybox
-CMD echo "Hello from a simple test image!"
+RUN mkdir -p /build/atv
+ADD . /build /build
+WORKDIR /build/atv
+
+ENV GOPATH=/build
+
+# build logic
+ARG ARG_BUILD=release-scratch
+RUN make $ARG_BUILD
+
+# Stage 2: Final image
+FROM alpine
+
+RUN apk update
+RUN apk upgrade
+RUN apk add ca-certificates && update-ca-certificates
+RUN apk add --update tzdata
+
+
+RUN adduser -S -D -H -h /app appuser
+USER appuser
+
+# Real copy from builder
+COPY --from=builder /build/atv/_dist/atv-example-service/atv-example-service /app/
+
+COPY --from=builder /build/atv/config /app/config
+
+WORKDIR /app
+
+CMD ["./atv-example-service"]

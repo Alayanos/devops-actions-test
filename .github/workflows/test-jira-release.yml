@@ -2,7 +2,7 @@ name: Trigger Jira Release Update
 
 on:
   push:
-    tags:
+    tags: #for testing purposes
       - "v*"
 
 jobs:
@@ -10,6 +10,7 @@ jobs:
     uses: at-visions/devops-actions/.github/workflows/jira-release-update.yml@main
     with:
       version: ${{ github.ref_name }}
+
     secrets:
       JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
       JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}

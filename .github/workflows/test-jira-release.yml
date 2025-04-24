@@ -7,7 +7,7 @@ on:
 
 jobs:
   call-jira-release:
-    uses: at-visions/devops-actions/.github/reusable-workflows/jira-release-update.yml@main
+    uses: at-visions/devops-actions/jira-release-update.yml@main
 
     with:
       version: ${{ github.ref_name }}

@@ -2,7 +2,7 @@ name: Trigger Jira Release Update
 
 on:
   push:
-    tags: #for testing purposes
+    tags:
       - "v*"
 
 jobs:
